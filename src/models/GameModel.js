@@ -10,13 +10,13 @@ const GameSchema = new mongoose.Schema(
     first_name: {
       type: String,
       required: [true, "Name is Required!"],
-      minlength: 3,
+      minlength: 0,
       trim: true,
     },
     last_name: {
       type: String,
       required: [true, "Name is Required!"],
-      minlength: 3,
+      minlength: 0,
       trim: true,
     },
     username: {

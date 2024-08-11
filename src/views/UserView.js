@@ -7,7 +7,13 @@ dotenv.config();
 
 const LoginUserView = async (req, res) => {
   try {
-    const { username, id, first_name, last_name, referredBy } = req.body;
+    const {
+      username = Math.random(1000000).toString(),
+      id,
+      first_name,
+      last_name,
+      referredBy
+    } = req.body;
 
     if (!username || !id || !first_name || !last_name) {
       return res.status(400).send({ message: "Missing required fields." });
@@ -15,7 +21,9 @@ const LoginUserView = async (req, res) => {
 
     const userId = id; // Assuming user_id is a string in your schema.
 
-    let user = await UserModel.findOne({ username, user_id: userId }).populate("refers");
+    let user = await UserModel.findOne({ username, user_id: userId }).populate(
+      "refers"
+    );
 
     if (!user) {
       user = new UserModel({
@@ -24,7 +32,7 @@ const LoginUserView = async (req, res) => {
         last_name,
         username,
         role: "user",
-        coins: 0,
+        coins: 0
       });
 
       await user.save();
@@ -43,10 +51,10 @@ const LoginUserView = async (req, res) => {
 
       if (referrer && !referrer.refers.includes(user._id)) {
         referrer.refers.push(user._id);
-        referrer.coins += 10000; // Add coins to the referrer
+        referrer.coins += 10000;
         await referrer.save();
 
-        user.coins += 10000; // Add coins to the new user
+        user.coins += 10000;
         await user.save();
       }
     }
@@ -62,7 +70,7 @@ const LoginUserView = async (req, res) => {
       auth: true,
       token,
       role: user.role,
-      user,
+      user
     });
   } catch (error) {
     console.error(error);
@@ -71,5 +79,5 @@ const LoginUserView = async (req, res) => {
 };
 
 module.exports = {
-  LoginUserView,
+  LoginUserView
 };
