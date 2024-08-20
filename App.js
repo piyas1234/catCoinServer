@@ -151,7 +151,7 @@ bot.onText(/\/start/, async (msg) => {
           if (!referrer.refers.includes(user._id)) {
             referrer.refers.push(user._id);
             referrer.coins += 10000; // Reward referrer with coins
-            referrer.dailySpin += 1; // Increase daily spins for referrer
+            referrer.dailySpin += 3; // Increase daily spins for referrer
             await referrer.save();
 
             user.coins += 10000; // Reward new user with coins
