@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema(
     },
     dailySpin: {
       type: Number, // Changed to Number for numerical operations
-      default: 7,
+      default: 3,
     },
     refers: [
       {

@@ -4,8 +4,7 @@ const { ObjectId } = require('mongodb');
 const followAndEarn = async (req, res) => {
   try {
     const userId = new ObjectId(req.id);
-
-    // Validate the user ID
+    
     if (!ObjectId.isValid(userId)) {
       return res.status(400).send({ message: 'Invalid user ID.' });
     }
